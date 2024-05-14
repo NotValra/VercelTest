@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok In-App Browser Detection</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            function isTikTokInAppBrowser(ua) {
+                return ua.indexOf('TikTok') > -1;
+            }
+
+            if (isTikTokInAppBrowser(userAgent)) {
+                alert("You are using TikTok's in-app browser. Please open this link in your default browser.");
+                window.location.href = "https://example.com"; // Replace with your specific link
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Welcome to Our Site</h1>
+    <p>If you are seeing this message, you are not in TikTok's in-app browser or JavaScript is disabled.</p>
+</body>
+</html>
