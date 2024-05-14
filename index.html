@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok In-App Browser Detection</title>
+    <title>TikTok In-App Browser Detection with Resize</title>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -12,9 +12,34 @@
                 return ua.indexOf('TikTok') > -1;
             }
 
+            function setColumns(columns) {
+                // Implement your logic to set the number of columns
+                console.log(`Setting columns to: ${columns}`);
+            }
+
+            function resize(innerWidth) {
+                if (window.matchMedia("only screen and (max-width: 760px)").matches) {
+                    setColumns(1);
+                } else if (innerWidth > 700) {
+                    setColumns(4);
+                } else if (innerWidth < 700 && innerWidth > 600) {
+                    setColumns(3);
+                } else if (innerWidth < 600 && innerWidth > 400) {
+                    setColumns(2);
+                } else {
+                    setColumns(1);
+                }
+            }
+
+            window.addEventListener("resize", function(event) {
+                resize(event.target.innerWidth);
+            }, true);
+
             if (isTikTokInAppBrowser(userAgent)) {
                 alert("You are using TikTok's in-app browser. Please open this link in your default browser.");
-                window.location.href = "https://http.cat"; // Replace with your specific link
+                window.location.href = "https://example.com"; // Replace with your specific link
+            } else {
+                resize(window.innerWidth);
             }
         });
     </script>
